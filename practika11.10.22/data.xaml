@@ -5,35 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:practika11._10._22"
         mc:Ignorable="d"
-        Title="Data" Height="455" Width="835" ResizeMode="NoResize">
-    <Grid Margin="0,0,0,0">
-        <StackPanel Margin="0,0,0,380" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="+" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Click="Button_Click"/>
-            <Button Content="-" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30" Width="30" Click="Button_Click_1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="C" VerticalAlignment="Center" Width="12"/>
-            <DatePicker HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="по" VerticalAlignment="Center"/>
-            <DatePicker HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30"/>
-            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10,0,0,0" Text="Категория:" VerticalAlignment="Center"/>
-            <ComboBox HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="100" Height="30"/>
-            <Button Content="Выбрать" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30" Width="80"/>
-            <Button Content="Очистить" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="30" Width="80"/>
-            <Button Content="Отчет" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="80" Height="30" Click="Button_Click_2"/>
+        Title="data" Height="500" Width="1000" ResizeMode="NoResize" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+            <Button x:Name="add_Button" Content="+" Height="30" Width="30" Margin="20,0,0,0" FontSize="15" Click="Button_Click"/>
+            <Button x:Name="delete_Button" Content="-" Height="30" Width="30" Margin="20,0,0,0" FontSize="15" Click="Button_Click_1"/>
+
+            <TextBlock Text="С" Margin="40,0,0,0" FontSize="15" VerticalAlignment="Center"/>
+            <DatePicker Text="01.11.2022" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Text="по" Margin="10,0,0,0" FontSize="15" VerticalAlignment="Center"/>
+            <DatePicker Text="31.12.2022" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Категория:" Margin="40,0,0,0" FontSize="15" VerticalAlignment="Center"/>
+            <ComboBox Text="31.12.2022" BorderThickness="2" Height="30" Width="100" Margin="20,0,0,0" VerticalAlignment="Center"/>
+            <Button Content="Выбрать" Height="30" Width="80" Margin="20,0,0,0" FontSize="15"/>
+            <Button Content="Очистить" Height="30" Width="80" Margin="20,0,0,0" FontSize="15"/>
+            <Button x:Name="otchet_Button" Content="Отчет" Height="30" Width="80" Margin="20,0,0,0" FontSize="15" Click="Button_Click_2"/>
+
         </StackPanel>
-        <ListView Margin="0,40,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Payname}" Width="160">Наименование платежа </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Count}" Width="160">Количество</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Prise}" Width="160">Цена</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Summ}" Width="160">Сумма</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=category}" Width="160">Категория</GridViewColumn>
-                </GridView>
-            </ListView.View>
-            
-        </ListView>
-
-
+        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Margin="20,5,20,0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="240" CanUserResize="False" Header="Наименование"/>
+                        <DataGridTextColumn Width="240" CanUserResize="False" Header="Цена * Количество"/>
+                        <DataGridTextColumn Width="240" CanUserResize="False" Header="Стоимость"/>
+                        <DataGridTextColumn Width="240" CanUserResize="False" Header="Дата"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <ListView Margin="20,0,20,0" x:Name="spisok_ListView" ScrollViewer.CanContentScroll="True" Height="400">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding product.product_name}"/>
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding count}"/>
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding price}" />
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding sum}" />
+                            <TextBlock TextWrapping="Wrap" Margin="20" Text="{Binding categories.category_name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
-
 </Window>

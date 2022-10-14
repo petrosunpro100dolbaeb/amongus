@@ -26,8 +26,6 @@ namespace practika11._10._22
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            data data = new data();
-            data.Show();
             this.Close();
         }
     }

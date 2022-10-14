@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace practika11._10._22
 {
@@ -27,14 +28,40 @@ namespace practika11._10._22
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            data data = new data();
-            data.Show();
-            this.Close();
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string login = name.Text;
+                string passwordFind = ConvertToHash(parol.Password);
+
+                var user = Instances.db.users.FirstOrDefault(q => q.login.Contains(login) && q.password.Contains(passwordFind));
+                if (user != null)
+                {
+                    //MessageBox.Show("YEEEES YEEEEEEES!!!!!!");
+                    data data = new data(user);
+                    data.Show();
+
+                    parol.Password = "";
+                    this.Hide();
+                }
+                else
+                    MessageBox.Show("Bruh");
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private string ConvertToHash(string whoFind)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] sourceBytes = Encoding.UTF8.GetBytes(whoFind);
+                byte[] hashBytes = sha256Hash.ComputeHash(sourceBytes);
+                string findOut = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
+                return findOut;
+            }
+            return "";
         }
     }
 }

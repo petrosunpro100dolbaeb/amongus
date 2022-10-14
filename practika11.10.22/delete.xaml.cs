@@ -19,15 +19,19 @@ namespace practika11._10._22
     /// </summary>
     public partial class delete : Window
     {
-        public delete()
+        ListView ListView;
+        public delete(ListView newListView)
         {
             InitializeComponent();
+            ListView = newListView;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            data data = new data();
-            data.Show();
+            var removedData = ListView.SelectedItems.Cast<products_users_table>().ToList();
+            Instances.db.products_users_table.RemoveRange(removedData);
+            Instances.db.SaveChanges();
+            Instances.db.ChangeTracker.Entries().ToList().ForEach(q => q.Reload());
             this.Close();
         }
     }

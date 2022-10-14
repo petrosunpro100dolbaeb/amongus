@@ -19,8 +19,8 @@
         <Button Content="Выход" HorizontalAlignment="Left" Margin="200,152,0,0" VerticalAlignment="Top" Height="30" Width="80" Click="Button_Click_1"/>
         <Label Content="Пароль" HorizontalAlignment="Left" Margin="100,95,0,0" VerticalAlignment="Top"/>
         <Label Content="Имя Пользователя" HorizontalAlignment="Left" Margin="40,45,0,0" VerticalAlignment="Top" Height="30" Width="118"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="182,94,0,0" VerticalAlignment="Top" Width="100" Height="30"/>
-        <TextBox HorizontalAlignment="Left" Margin="182,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="30"/>
+        <PasswordBox x:Name="parol" Password="alampiev_be_amv" HorizontalAlignment="Left" Margin="182,94,0,0" VerticalAlignment="Top" Width="100" Height="30"/>
+        <TextBox x:Name="name"  Text="alampiev_be_amv" HorizontalAlignment="Left" Margin="182,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="30"/>
 
     </Grid>
 </Window>
